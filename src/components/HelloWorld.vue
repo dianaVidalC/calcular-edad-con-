@@ -2,10 +2,12 @@
   .hello
     h1 Ingresa tus datos
     input(v-model="name" placeholder="Nombres")
+    button(@click="format") Formated 
     br
     input(v-model="lastName" placeholder="Apellidos")
     br
     p {{ fullName }}
+    p {{ formattedName }}
     input(type="date" v-model="fecha")
     p {{ age }}
 </template>
@@ -46,6 +48,14 @@ export default {
       }
       if(this.edad) return `Tu edad es: ${this.edad}`;
     }
+  },
+  watch: {
+    name (newVal,oldVal) {
+      console.log(newVal, oldVal);
+    }
+  },
+  format:function () {
+      this.formattedName = this.name.split(" ").join("-").toUpperCase();
   }
 }
 </script>
@@ -66,4 +76,11 @@ export default {
       font-size: 24px
       font-weight: bold
       margin: 1rem 0
+    button
+      border-radius: 5px
+      background-color: #0044Af
+      outline: none
+      padding: 7px
+      color: #ffffff
+      border: transparent
 </style>
